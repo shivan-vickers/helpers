@@ -7,7 +7,7 @@ target_string = ARGV.shift.downcase
 files_to_ignore = ARGV.dup
 ARGV.clear
 
-files = Dir.glob('**/*').reject { |f| File.directory? f }
+files = Dir.glob('**/*').reject { |e| File.directory? e }
 
 total_matches = 0
 
