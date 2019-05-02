@@ -1,6 +1,6 @@
 ## helpers
 
-These are just some random scripts to help me with development.
+These are just some random, quick scripts to that I use during development.
 
 ### notes
 
