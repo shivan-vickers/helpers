@@ -1,20 +1,37 @@
 # frozen_string_literal: true
 
-abort 'arg missing' if ARGV.empty?
+require 'optparse'
+
+files_to_search = Dir.glob('**/*').reject { |e| File.directory? e }
+
+parser = OptionParser.new
+
+parser.on('-t', '--target=PATH', 'Search files or directories matching PATH') do |p|
+  files_to_search.select! { |f| f.include? p }
+end
+
+parser.on('-x', '--exclude=PATH', 'Exclude files or directories matching PATH') do |p|
+  files_to_search.reject!{ |f| f.include? p }
+end
+
+parser.on('-h','--help', 'Print this help') do
+  puts parser
+  exit
+end
+
+if ARGV.empty?
+  puts parser
+  exit
+end
+
+parser.parse!
 
 target_string = ARGV.shift.downcase
 
-files_to_ignore = ARGV.dup
-ARGV.clear
-
-files = Dir.glob('**/*').reject { |e| File.directory? e }
-
 total_matches = 0
 
-files.each do |filename|
+files_to_search.each do |filename|
   next if File.basename(filename) == File.basename(__FILE__)
-
-  next if files_to_ignore.any? { |f| filename.include? f }
 
   File.open(filename) do |file|
     matches = []
