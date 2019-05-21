@@ -6,6 +6,8 @@ files_to_search = Dir.glob('**/*').reject { |e| File.directory? e }
 
 parser = OptionParser.new
 
+parser.banner = 'Usage: hunt STRING [options]'
+
 parser.on('-t', '--target=PATH', 'Search files or directories matching PATH') do |p|
   files_to_search.select! { |f| f.include? p }
 end
