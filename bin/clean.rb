@@ -3,9 +3,9 @@
 require 'fileutils'
 
 directories_to_clean = [
-  "dump/local",
-  "dump/server",
-  "dump/comp",
+  'dump/local',
+  'dump/server',
+  'dump/comp'
 ]
 
 unless ARGV.empty?
@@ -28,4 +28,4 @@ directories_to_clean.each do |dir|
   end
 end
 
-puts "Finished!"
+puts 'Finished!'

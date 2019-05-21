@@ -15,14 +15,14 @@ parser.on('-i', '--include=PATH', 'Search only files or directories matching PAT
 end
 
 parser.on('-x', '--exclude=PATH', 'Exclude files or directories matching PATH') do |p|
-  files_to_search.reject!{ |f| f.include? p }
+  files_to_search.reject! { |f| f.include? p }
 end
 
 parser.on('-c', '--case-sensitive', 'Run a case sensitive search') do
-  case_sensitive= true
+  case_sensitive = true
 end
 
-parser.on('-h','--help', 'Print this help') do
+parser.on('-h', '--help', 'Print this help') do
   puts parser
   exit
 end
