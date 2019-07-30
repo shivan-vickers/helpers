@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+TAGS = %w[TODO FIXME OPTIMIZE REVIEW HACK].freeze
+
 files = Dir.glob('**/*.rb')
 
 files.each do |filename|
@@ -9,12 +11,7 @@ files.each do |filename|
     notes = []
 
     file.each_line do |line|
-      next unless line.include?('# TODO: ')     ||
-                  line.include?('# FIXME: ')    ||
-                  line.include?('# OPTIMIZE: ') ||
-                  line.include?('# REVIEW: ')   ||
-                  line.include?('# HACK: ')     ||
-                  line.include?('#   ')
+      next unless TAGS.any? { |t| line.include? "# #{t}: " }
 
       padding = ' ' * (5 - file.lineno.to_s.length)
       notes << "#{padding}#{file.lineno} |#{line.strip.sub('#', '')}"
@@ -23,7 +20,7 @@ files.each do |filename|
     unless notes.empty?
       puts ''
       puts " line | #{filename}"
-      puts " -----|#{'-' * 79}"
+      puts " -----+#{'-' * 79}"
       puts notes
       puts ''
     end
