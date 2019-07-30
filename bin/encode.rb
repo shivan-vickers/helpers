@@ -5,7 +5,7 @@ require 'clipboard'
 
 str = ARGV.shift
 
-encoded = Base64.encode64 str
+encoded = Base64.strict_encode64 str
 
 Clipboard.copy encoded
 
